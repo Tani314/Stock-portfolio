@@ -40,7 +40,8 @@ export const getTransactions = () => async dispatch => {
 export const addTransaction = input => async (dispatch, getState) => {
   let res;
   try {
-    res = await axios.post("/api/transactions", input);
+    res = await axios.post("/api/transaction", input);
+    console.log("DATA==>", res);
   } catch (inputError) {
     return dispatch(gotTransactions({ error: inputError }));
   }

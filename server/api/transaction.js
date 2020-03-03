@@ -3,6 +3,7 @@ const axios = require("axios");
 const { Transactions } = require("../db/models");
 const { Stock } = require("../db/models");
 const { User } = require("../db/models");
+const { Op } = require("sequelize");
 // const {isAfterMarketClose} = require('../../util')
 module.exports = router;
 
@@ -27,10 +28,12 @@ router.post("/", async (req, res, next) => {
         process.env.IEX_API
       }`
     );
+    console.log("stock data:", stock.data);
     stock = stock.data;
     const currUser = await User.findOne({
       where: { id: req.user.id }
     });
+    console.log("User", currUser);
     let currentPrice;
     if (stock.iexRealtimePrice) {
       currentPrice = stock.iexRealtimePrice;
@@ -46,10 +49,17 @@ router.post("/", async (req, res, next) => {
         quantity,
         currentPrice
       });
-      const newStock = await Stock.createOrUpdate(ticker, quantity);
+      let currStock = await Stock.findOne({
+        where: {
+          [Op.and]: [{ ticker: req.body.ticker }, { userId: req.user.id }]
+        }
+      });
+      console.log("STOCK", currStock);
+      await currStock.update({
+        totalQuantity: currStock.totalQuantity + quantity
+      });
       await newTransaction.setUser(currUser);
-      await newStock.setUser(currUser);
-      await User.update(
+      await currUser.update(
         {
           accountBalance: currUser.accountBalance - currentPrice * quantity
         },

@@ -2,44 +2,27 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getStock } from "../store/stocks";
 import { Stock } from "./stock";
+import PortfolioForm from "./portfolioForm";
 
-/**
- * COMPONENT
- */
 class Portfolio extends Component {
   componentDidMount() {
     this.props.getStock();
   }
 
-  componentDidUpdate() {
-    // Checks if portfolio needs dynamic update, based on if
-    // most recent update was when market opened
-    // if (this.props.portfolio[0]) {
-    //   let mostRecentUpdate = new Date(this.props.portfolio[0].updatedAt)
-    //   if (!updatedWhenMarketOpenedToday(mostRecentUpdate, new Date())) {
-    //     this.props.getPortfolio()
-    //   }
-    // }
-  }
+  componentDidUpdate() {}
 
   render() {
-    const { portfolio } = this.props;
-    console.log("Port==>", portfolio);
-    // let portfolioValue = 0
-    // if (portfolio) {
-    //   portfolioValue = portfolio.reduce((total, stock) => {
-    //     total += stock.value
-    //     return total
-    //   }, 0)
-    // }
+    const { portfolio, accountBalance } = this.props;
+    console.log("Port==>", accountBalance);
     return (
       <div>
-        <h2>Portfolio:</h2>
+        <h2>Portfolio: </h2>
         {portfolio ? (
           portfolio.map(stock => <Stock key={stock.id} stock={stock} />)
         ) : (
           <div> Nothing to show</div>
         )}
+        <PortfolioForm />
       </div>
     );
   }
@@ -48,7 +31,8 @@ class Portfolio extends Component {
 const mapState = state => {
   console.log("STATE===>", state);
   return {
-    portfolio: state.stocks
+    portfolio: state.stocks,
+    accountBalance: state.user.accountBalance
   };
 };
 

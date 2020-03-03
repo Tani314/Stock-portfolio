@@ -1,14 +1,11 @@
 import React from "react";
 
-/**
- * COMPONENT
- */
 export const Stock = props => {
   const { stock } = props;
   let color = "equal-to-open";
-  if (stock.openingPrice > stock.value / stock.totalShares) {
+  if (stock.openingPrice > stock.value / stock.totalQuantity) {
     color = "less-than-open";
-  } else if (stock.openingPrice < stock.value / stock.totalShares) {
+  } else if (stock.openingPrice < stock.value / stock.totalQuantity) {
     color = "greater-than-open";
   }
 
