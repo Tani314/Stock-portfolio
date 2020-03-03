@@ -8,20 +8,16 @@ class PortfolioForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit = event => {
-    console.log("Listening");
     event.preventDefault();
     let input = {
       ticker: event.target.ticker.value,
       quantity: event.target.quantity.value,
       type: "BUY"
     };
-    console.log("input", input);
-    console.log("props", this.props);
     this.props.addTransaction(input);
   };
 
   render() {
-    console.log("Props==>", this.props);
     return (
       <div>
         <form onSubmit={event => this.handleSubmit(event)}>
@@ -49,7 +45,6 @@ class PortfolioForm extends Component {
 }
 
 const mapState = state => {
-  console.log("Trans==>", state.transaction);
   return {
     error: state.transaction.error
   };
