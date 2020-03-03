@@ -1,42 +1,48 @@
 import axios from "axios";
 import history from "../history";
+
 /**
  * ACTION TYPES
  */
-const GOT_TRANSACTION = "GOT_TRANSACTION";
+const GOT_TRANSACTIONS = "GOT_TRANSACTIONS";
 const ADDED_TRANSACTION = "ADDED_TRANSACTION";
+
 /**
  * INITIAL STATE
  */
-const defaultTransaction = [];
+const defaultTransactions = [];
 
 /**
  * ACTION CREATORS
  */
-const gotTransactions = transactions => (
-  { type: GOT_TRANSACTION }, transactions
-);
-const addedTransaction = newTransaction => (
-  { type: ADDED_TRANSACTION }, newTransaction
-);
+const gotTransactions = transactions => ({
+  type: GOT_TRANSACTIONS,
+  transactions
+});
+const addedTransaction = newTransaction => ({
+  type: ADDED_TRANSACTION,
+  newTransaction
+});
+
 /**
  * THUNK CREATORS
  */
 export const getTransactions = () => async dispatch => {
   try {
-    const res = await axios.get("/api/transactions");
-    dispatch(gotTransactions(res.data || defaultTransaction));
+    const res = await axios.get("/api/transaction");
+    dispatch(gotTransactions(res.data || defaultTransactions));
     history.push("/transactions");
   } catch (err) {
     console.error(err);
   }
 };
-export const addTransaction = newTrans => async (dispatch, getState) => {
+
+export const addTransaction = input => async (dispatch, getState) => {
   let res;
   try {
-    res = await axios.post(`/api/transactions`, newTrans);
-  } catch (inputErr) {
-    return dispatch(gotTransactions({ error: inputErr }));
+    res = await axios.post("/api/transactions", input);
+  } catch (inputError) {
+    return dispatch(gotTransactions({ error: inputError }));
   }
   try {
     let currentState = getState();
@@ -50,17 +56,19 @@ export const addTransaction = newTrans => async (dispatch, getState) => {
     console.error(err);
   }
 };
+
 /**
  * REDUCER
  */
-export default function(state = defaultTransaction, action) {
+export default function(state = defaultTransactions, action) {
   switch (action.type) {
-    case GOT_TRANSACTION:
-      return action.transaction;
-    case ADDED_TRANSACTION:
-      let newTransaction = [...state];
-      newTransaction.push(action.newTransaction);
-      return newTransaction;
+    case GOT_TRANSACTIONS:
+      return action.transactions;
+    case ADDED_TRANSACTION: {
+      let newTransactions = [...state];
+      newTransactions.push(action.newTransaction);
+      return newTransactions;
+    }
     default:
       return state;
   }

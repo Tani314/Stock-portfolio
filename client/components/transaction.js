@@ -1,34 +1,42 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { getTransactions } from "../store/transaction";
+import { SingleTransaction } from "./singleTransaction";
 
-/**
- * COMPONENT
- */
-export const Transaction = props => {
-  const { data } = props;
+class Transaction extends Component {
+  componentDidMount() {
+    this.props.getTransactions();
+  }
 
-  return (
-    <div>
-      <h3>{data}</h3>
-    </div>
-  );
-};
+  render() {
+    const { transactions } = this.props;
+    return (
+      <div>
+        <h2>Transactions: </h2>
+        {transactions ? (
+          transactions.map(transaction => (
+            <SingleTransaction key={transaction.id} transaction={transaction} />
+          ))
+        ) : (
+          <div>No Transaction To Show</div>
+        )}
+      </div>
+    );
+  }
+}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    data: state.user.data
+    transactions: state.transactions
+  };
+};
+const mapDispatch = dispatch => {
+  return {
+    getTransactions: () => dispatch(getTransactions())
   };
 };
 
-export default connect(mapState)(Transaction);
-
-/**
- * PROP TYPES
- */
-Transaction.propTypes = {
-  data: PropTypes.string
-};
+export default connect(mapState, mapDispatch)(Transaction);
