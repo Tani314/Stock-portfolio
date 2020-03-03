@@ -9,11 +9,12 @@ class Transaction extends Component {
   }
 
   render() {
-    const { transactions } = this.props;
+    const transactions = this.props.transactions;
+    console.log("Trans==>", transactions);
     return (
       <div>
         <h2>Transactions: </h2>
-        {transactions ? (
+        {transactions && !transactions.error ? (
           transactions.map(transaction => (
             <SingleTransaction key={transaction.id} transaction={transaction} />
           ))
@@ -30,7 +31,7 @@ class Transaction extends Component {
  */
 const mapState = state => {
   return {
-    transactions: state.transactions
+    transactions: state.transaction
   };
 };
 const mapDispatch = dispatch => {

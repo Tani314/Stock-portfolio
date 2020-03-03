@@ -14,10 +14,10 @@ export const Stock = props => {
 
   return (
     <div className={`line-item ${color}`}>
-      <div className="column">{stock.symbol}</div>
-      <div className="column">{stock.totalShares} Shares</div>
+      <div className="column">{stock.ticker}</div>
+      <div className="column">{stock.totalQuantity} Shares</div>
       {/* Prices are recorded accurately but rounded for cleaner display */}
-      <div className="column">${stock.value.toFixed(2)}</div>
+      {/* <div className="column">${stock.value.toFixed(2)}</div> */}
     </div>
   );
 };

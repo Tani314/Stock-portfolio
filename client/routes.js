@@ -20,11 +20,11 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route path="/portfolio" component={Portfolio} />
-            <Route path="/transaction" component={Transaction} />
-            <Route component={Portfolio} />
+            <Route path="/transactions" component={Transaction} />
+            <Route path="/" component={Portfolio} />
           </Switch>
         )}
-        <Route component={Signin} />
+        <Route path="/" component={Signin} />
       </Switch>
     );
   }
