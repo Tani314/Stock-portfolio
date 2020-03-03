@@ -28,12 +28,10 @@ router.post("/", async (req, res, next) => {
         process.env.IEX_API
       }`
     );
-    console.log("stock data:", stock.data);
     stock = stock.data;
     const currUser = await User.findOne({
       where: { id: req.user.id }
     });
-    console.log("User", currUser);
     let currentPrice;
     if (stock.iexRealtimePrice) {
       currentPrice = stock.iexRealtimePrice;
@@ -54,7 +52,6 @@ router.post("/", async (req, res, next) => {
           [Op.and]: [{ ticker: req.body.ticker }, { userId: req.user.id }]
         }
       });
-      console.log("STOCK", currStock);
       await currStock.update({
         totalQuantity: currStock.totalQuantity + quantity
       });
