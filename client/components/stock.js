@@ -1,20 +1,26 @@
 import React from "react";
 
+const setStockStatus = stock => {
+  if (stock.openPrice === stock.currPrice / stock.totalQuantity)
+    return "equalToOpen";
+  if (stock.openPrice > stock.currPrice / stock.totalQuantity)
+    return "lessThanOpen";
+  if (stock.openPrice < stock.currPrice / stock.totalQuantity)
+    return "greaterThanOpen";
+};
 export const Stock = props => {
   const { stock } = props;
-  let color = "equal-to-open";
-  if (stock.openingPrice > stock.value / stock.totalQuantity) {
-    color = "less-than-open";
-  } else if (stock.openingPrice < stock.value / stock.totalQuantity) {
-    color = "greater-than-open";
-  }
-
+  console.log("STOCK", stock);
+  const stockStatus = setStockStatus(stock);
   return (
-    <div className={`line-item ${color}`}>
-      <div className="column">{stock.ticker}</div>
-      <div className="column">{stock.totalQuantity} Shares</div>
-      {/* Prices are recorded accurately but rounded for cleaner display */}
-      {/* <div className="column">${stock.value.toFixed(2)}</div> */}
+    <div className={`${stockStatus}`}>
+      <div className="column">
+        {stock.ticker} - {stock.totalQuantity} Shares ${(
+          stock.currPrice * stock.totalQuantity
+        ).toFixed(2)}
+      </div>
+      {/* {stockStatus === 'greaterThanOpen' && <div className="column">↑</div>}
+    {stockStatus === 'lessThanOpen' && <div className="column">↓</div>} */}
     </div>
   );
 };

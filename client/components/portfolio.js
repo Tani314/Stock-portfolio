@@ -9,14 +9,12 @@ class Portfolio extends Component {
     this.props.getStock();
   }
 
-  componentDidUpdate() {}
-
   render() {
     const accountBalance = this.props.accountBalance;
     const portfolio = this.props.portfolio;
     return (
       <div>
-        <h2>Portfolio: ({accountBalance}) </h2>
+        <h2>Portfolio: (${accountBalance}) </h2>
         {portfolio ? (
           portfolio.map(stock => <Stock key={stock.id} stock={stock} />)
         ) : (
