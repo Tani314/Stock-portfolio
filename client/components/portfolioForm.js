@@ -5,6 +5,7 @@ import { addTransaction } from "../store/transaction";
 class PortfolioForm extends Component {
   constructor(props) {
     super(props);
+    console.log("PPPP", props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit = event => {
@@ -20,7 +21,7 @@ class PortfolioForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={event => this.handleSubmit(event)}>
+        <form className="ticker" onSubmit={event => this.handleSubmit(event)}>
           <div>
             <label htmlFor="ticker">Ticker: </label>
             <input type="text" name="ticker" placeholder="Ticker" />
@@ -45,6 +46,7 @@ class PortfolioForm extends Component {
 }
 
 const mapState = state => {
+  console.log("MAPP", state.transaction.error);
   return {
     error: state.transaction.error
   };

@@ -10,10 +10,9 @@ const setStockStatus = stock => {
 };
 export const Stock = props => {
   const { stock } = props;
-  console.log("STOCK", stock);
   const stockStatus = setStockStatus(stock);
   return (
-    <div className={`${stockStatus}`}>
+    <div className={`line-item ${stockStatus}`}>
       <div className="column">
         {stock.ticker} - {stock.totalQuantity} Shares ${(
           stock.currPrice * stock.totalQuantity

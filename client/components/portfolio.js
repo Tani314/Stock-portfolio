@@ -8,10 +8,16 @@ class Portfolio extends Component {
   componentDidMount() {
     this.props.getStock();
   }
-
   render() {
     const accountBalance = this.props.accountBalance;
     const portfolio = this.props.portfolio;
+    let portfolioValue = 0;
+    if (portfolio) {
+      portfolioValue = portfolio.reduce((total, stock) => {
+        total += stock.value;
+        return total;
+      }, 0);
+    }
     return (
       <div>
         <h2>Portfolio: (${accountBalance}) </h2>

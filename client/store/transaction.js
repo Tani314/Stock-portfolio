@@ -46,6 +46,7 @@ export const addTransaction = input => async (dispatch, getState) => {
   }
   try {
     let currentState = getState();
+    console.log("STATe", currentState);
     if (currentState.transaction.error) {
       dispatch(getTransactions());
     } else {

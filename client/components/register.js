@@ -8,7 +8,7 @@ const RegisterForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <form className="sign" onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">
             <small>Name</small>
