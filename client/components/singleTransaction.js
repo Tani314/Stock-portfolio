@@ -4,7 +4,7 @@ export const SingleTransaction = props => {
   const { transaction } = props;
   return (
     <div>
-      <div>
+      <div className="column">
         {transaction.type}({transaction.ticker})- {transaction.quantity} Shares
         @ $
         {transaction.currentPrice}
