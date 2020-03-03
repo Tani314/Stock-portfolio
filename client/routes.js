@@ -24,7 +24,7 @@ class Routes extends Component {
             <Route path="/" component={Portfolio} />
           </Switch>
         )}
-        {/* <Route path="/" component={Signin} /> */}
+        <Route path="/" component={Signin} />
       </Switch>
     );
   }
