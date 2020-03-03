@@ -17,7 +17,7 @@ const gotStock = stock => ({ type: GOT_STOCK, stock });
  */
 export const getStock = () => async dispatch => {
   try {
-    const res = await axios.get("/api/stock");
+    const res = await axios.get("/api/portfolio");
     dispatch(gotStock(res.data || defaultStock));
   } catch (err) {
     console.error(err);
