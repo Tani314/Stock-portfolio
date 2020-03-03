@@ -1,13 +1,13 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
-import {auth} from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { auth } from "../store";
 
 /**
  * COMPONENT
  */
-const Signin = props => {
-  const {name, displayName, handleSubmit, error} = props
+const SigninForm = props => {
+  const { name, displayName, handleSubmit, error } = props;
 
   return (
     <div>
@@ -30,36 +30,36 @@ const Signin = props => {
         {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
-  )
-}
+  );
+};
 const mapSignin = state => {
   return {
-    name: 'signin',
-    displayName: 'Sign In',
+    name: "signin",
+    displayName: "Sign In",
     error: state.user.error
-  }
-}
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      evt.preventDefault();
+      const formName = evt.target.name;
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      dispatch(auth(email, password, formName));
     }
-  }
-}
+  };
+};
 
-export const Signin = connect(mapSignin, mapDispatch)(Signin)
+export const Signin = connect(mapSignin, mapDispatch)(SigninForm);
 
 /**
  * PROP TYPES
  */
-AuthForm.propTypes = {
+SigninForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
-}
+};

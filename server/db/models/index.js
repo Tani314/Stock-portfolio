@@ -1,9 +1,12 @@
-const User = require('./user')
-
+const User = require("./user");
+const Stock = require("./stock");
 /**
  associations
  */
+Stock.belongsTo(User);
+User.hasMany(Stock);
 
 module.exports = {
-  User
-}
+  User,
+  Stock
+};

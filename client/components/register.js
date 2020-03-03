@@ -1,22 +1,22 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
-import {auth} from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { auth } from "../store";
 
 /**
  * COMPONENT
  */
-const Register = props => {
-  const {name, displayName, handleSubmit, error} = props
+const RegisterForm = props => {
+  const { name, displayName, handleSubmit, error } = props;
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
-      <div>
-          <label htmlFor="name">
+        <div>
+          <label htmlFor="username">
             <small>Name</small>
           </label>
-          <input name="name" type="text" />
+          <input name="username" type="text" />
         </div>
         <div>
           <label htmlFor="email">
@@ -36,38 +36,38 @@ const Register = props => {
         {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
-  )
-}
-
+  );
+};
 
 const mapRegister = state => {
   return {
-    name: 'register',
-    displayName: 'Register',
+    name: "register",
+    displayName: "Register",
     error: state.user.error
-  }
-}
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      evt.preventDefault();
+      const formName = evt.target.name;
+      const username = evt.target.username.value;
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      dispatch(auth(username, email, password, formName));
     }
-  }
-}
+  };
+};
 
-export const Register = connect(mapRegister, mapDispatch)(Register)
+export const Register = connect(mapRegister, mapDispatch)(RegisterForm);
 
 /**
  * PROP TYPES
  */
-AuthForm.propTypes = {
+RegisterForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
-}
+};

@@ -1,34 +1,37 @@
-import axios from 'axios'
-import history from '../history'
-
+import axios from "axios";
 /**
  * ACTION TYPES
  */
-const GET_STOCK = 'GET_STOCK'
-
+const GOT_STOCK = "GOT_STOCK";
 /**
  * INITIAL STATE
  */
-const defaultStock = {}
+const defaultStock = [];
 
 /**
  * ACTION CREATORS
  */
-const getStock = stock => ({type: GET_STOCK, stock})
-
-
+const gotStock = stock => ({ type: GOT_STOCK, stock });
 /**
  * THUNK CREATORS
  */
+export const getStock = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/stock");
+    dispatch(gotStock(res.data || defaultStock));
+  } catch (err) {
+    console.error(err);
+  }
+};
 
- /**
+/**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function(state = defaultStock, action) {
   switch (action.type) {
-    case GET_STOCK:
-      return action.stock
+    case GOT_STOCK:
+      return action.stock;
     default:
-      return state
+      return state;
   }
 }
