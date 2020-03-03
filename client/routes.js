@@ -21,10 +21,9 @@ class Routes extends Component {
           <Switch>
             <Route path="/portfolio" component={Portfolio} />
             <Route path="/transactions" component={Transaction} />
-            <Route path="/" component={Portfolio} />
           </Switch>
         )}
-        <Route path="/" component={Signin} />
+        <Route component={Signin} />
       </Switch>
     );
   }
