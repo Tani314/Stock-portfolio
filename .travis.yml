@@ -22,6 +22,6 @@ before_deploy:
 deploy:
   skip_cleanup: true # prevents travis from deleting the build
   provider: heroku
-  app: YOUR-HEROKU-APP-NAME-HERE # see README
+  app: astock-portfolio
   api_key:
-    secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+    secure: 'sk_af566441588d4d7eb5b798a2cfba7bd5'
