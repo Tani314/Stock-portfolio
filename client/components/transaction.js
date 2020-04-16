@@ -10,7 +10,6 @@ class Transaction extends Component {
 
   render() {
     const transactions = this.props.transactions;
-    console.log("Trans==>", transactions);
     return (
       <div>
         <h2>Transactions: </h2>
