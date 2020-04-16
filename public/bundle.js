@@ -687,7 +687,6 @@ var Transaction = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var transactions = this.props.transactions;
-      console.log("Trans==>", transactions);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Transactions: "), transactions && !transactions.error ? transactions.map(function (transaction) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleTransaction__WEBPACK_IMPORTED_MODULE_3__["SingleTransaction"], {
           key: transaction.id,

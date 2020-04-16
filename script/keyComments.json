@@ -1,0 +1,7 @@
+{
+  "api_key": " the secure key indicates an encrypted value",
+  "app": " app should be your heroku app name",
+  "before_deploy": " omit node_modules, since we set skip_cleanup below",
+  "deploy": "keys",
+  "skip_cleanup": " prevents travis from deleting the build"
+}
