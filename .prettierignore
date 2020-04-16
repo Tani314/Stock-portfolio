@@ -4,3 +4,4 @@ package-lock.json
 package.json
 script/seed.js
 public/bundle.js.rej
+secrets.js
